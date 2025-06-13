@@ -32,27 +32,29 @@ class HomeScreen extends HookWidget {
     }
 
     return Scaffold(
-      body: PageView.builder(
-        itemCount: 7,
-        itemBuilder: (context, index) {
-          // First page today, others history
-          if (index == 0) {
-            return CatImageViewer(imageUrl: catUrl.value!, caption: caption.value);
-          }
-          return FutureBuilder(
-            future: ImageService.getLast7Cats(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              final list = snapshot.data!;
-              if (index >= list.length) {
-                return const Center(child: Text('No cat'));
-              }
-              return CatImageViewer(imageUrl: list[index].url);
-            },
-          );
-        },
+      body: SafeArea(
+        child: PageView.builder(
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            // First page today, others history
+            if (index == 0) {
+              return CatImageViewer(imageUrl: catUrl.value!, caption: caption.value);
+            }
+            return FutureBuilder(
+              future: ImageService.getLast7Cats(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                final list = snapshot.data!;
+                if (index >= list.length) {
+                  return const Center(child: Text('No cat'));
+                }
+                return CatImageViewer(imageUrl: list[index].url);
+              },
+            );
+          },
+        ),
       ),
     );
   }
