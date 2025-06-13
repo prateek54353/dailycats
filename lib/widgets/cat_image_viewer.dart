@@ -40,18 +40,22 @@ class CatImageViewer extends StatelessWidget {
             ),
           ),
           if (caption != null)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.black54, Colors.transparent],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter)),
-              child: Text(
-                caption!,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
+            Positioned(
+              bottom: 32,
+              left: 0,
+              right: 0,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Text(
+                  caption!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                ),
               ),
             )
         ],
